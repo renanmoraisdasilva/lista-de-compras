@@ -1,0 +1,14 @@
+{
+  "produtos": [
+    {
+      "id": 8,
+      "nome": "Mouse",
+      "comprado": true
+    },
+    {
+      "id": 3,
+      "nome": "Teclado",
+      "comprado": false
+    }
+  ]
+}

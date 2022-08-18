@@ -1,0 +1,49 @@
+<div class="fundo">
+  <div class="container ">
+    <div class="row">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #0e1e45; height: 105px;">
+          <a class="navbar-brand" href="#">
+            <img src="../assets/imagens/stf_logo_developerUp.png" alt="" style="padding-left: 5rem;" width="330" height="55"  class="d-inline align-text-top">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                  data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+                  aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item ">
+                <a [routerLink]="['enunciado']"  class="navbar-brand" href="#">Enunciado
+                  <span class="sr-only"></span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a [routerLink]="['listar']"  class="navbar-brand" href="#">Avaliação
+                  <span class="sr-only"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="conteudo">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <footer class="border-top bg-dark border-light">
+    <div class="footer">
+      <div class="row py-2 justify-content-center align-items-center">
+        <div class="col-12 text-center">
+          <img class="img-fluid" src="../assets/imagens/stf_logo_peq.png" alt="">
+          <small class="d-block text-muted">
+            © 1988-{{dataAtual?.getFullYear()}} STEFANINI IT SOLUTIONS
+          </small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
