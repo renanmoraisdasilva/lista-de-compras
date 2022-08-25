@@ -25,7 +25,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import br.com.stefanini.developerup.dto.ProdutoDto;
-import br.com.stefanini.developerup.model.Produto;
 import br.com.stefanini.developerup.service.ProdutoService;
 
 
@@ -54,10 +53,7 @@ public class ProdutosRest {
     @POST
     @Operation(summary = "Salvar", description = "Salva um produto na lista de compras")
     @Transactional
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Basic(optional = false)
-    @Column(name = "id",unique=true, nullable = false)
+
     @APIResponse(
         responseCode = "200",
         description = "ProdutoDto",

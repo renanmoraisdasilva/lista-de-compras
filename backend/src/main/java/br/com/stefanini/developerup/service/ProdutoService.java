@@ -33,8 +33,6 @@ public class ProdutoService {
 
     public Produto salvar(ProdutoDto request){
         Produto produto = new Produto();
-        Long id = Math.abs(new Random().nextLong())/100000000;
-        produto.setId(id);
         produto.setNome(request.getNome());
         produto.setComprado(request.isComprado());
         produto.persistAndFlush();        
