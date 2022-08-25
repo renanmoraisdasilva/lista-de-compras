@@ -1,7 +1,6 @@
 import { Produto } from './../Objetos/produto';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProdutoService } from '../service/produto.service';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -27,8 +26,7 @@ export class ListaProdutoComponent implements OnInit {
   carregarLoading = false;
   constructor(
     private toastr: ToastrService,
-    private produtoService: ProdutoService,
-    private router: Router
+    private produtoService: ProdutoService
   ) {}
 
   ngOnInit(): void {
@@ -50,26 +48,25 @@ export class ListaProdutoComponent implements OnInit {
   }
 
   editarProduto(produto: Produto): void {
-    this.produtoEditado.nome = produto.nome;
+    this.produtoEditado = { ...produto };
     produto.editarState = !produto.editarState;
-    const index = this.produtos.findIndex(
-      (obj) => obj.codigo == produto.codigo
-    );
-    this.produtos[index].nome = produto.nome;
   }
 
   cancelarEditarProduto(produto: Produto): void {
     produto.editarState = !produto.editarState;
-    this.produtoEditado.nome = produto.nome;
+  }
+
+  salvarUpdateProduto(produtoEditado: Produto, produto: Produto): void {
+    this.updateProduto(produtoEditado);
+    produto.nome = produtoEditado.nome;
+    produto.editarState = !produto.editarState;
   }
 
   updateProduto(produto: Produto): void {
-    produto.nome = this.produtoEditado.nome;
     this.produtoService.update(produto).subscribe((response) => {
       response['codigo'] = response['id'];
       delete response['id'];
     });
-    produto.editarState = false;
   }
 
   apagarProduto(produto: Produto): void {

@@ -30,7 +30,7 @@
           <div class="buttons-produto">
             <button
               *ngIf="produto.editarState"
-              (click)="updateProduto(produto)"
+              (click)="salvarUpdateProduto(produtoEditado, produto)"
             >
               Salvar
             </button>
