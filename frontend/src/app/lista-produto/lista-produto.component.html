@@ -1,50 +1,59 @@
-<input
-  [(ngModel)]="novoProduto.nome"
-  placeholder="Nome do Produto"
-  type="text"
-/>
-<button (click)="incluirProduto()">Incluir Produto</button>
-<table
-  class="container cor-texto table table-striped"
-  *ngIf="carregarLoading; else carregando"
->
-  <thead>
-    <tr>
-      <th scope="col">Nome</th>
-    </tr>
-  </thead>
+<div *ngIf="carregarLoading; else carregando">
+  <input
+    [(ngModel)]="novoProduto.nome"
+    placeholder="Nome do Produto"
+    type="text"
+  />
+  <button (click)="incluirProduto()">Incluir Produto</button>
+  <table class="container cor-texto table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr
-      *ngFor="let produto of produtos"
-      [ngStyle]="{ backgroundColor: produto.comprado ? 'green' : '' }"
-    >
-      <td class="table_row">
-        <span *ngIf="!produto.editarState">
-          {{ produto.nome }}
-        </span>
-        <input
-          [(ngModel)]="produto.nome"
-          placeholder="Nome do Produto"
-          type="text"
-          *ngIf="produto.editarState"
-        />
-        <div>
-          <button *ngIf="produto.editarState" (click)="updateProduto(produto)">
-            Salvar
-          </button>
-          <button (click)="editarProduto(produto)">Editar</button>
-          <button (click)="apagarProduto(produto)">Apagar</button>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div class="buy-cancel-buttons">
-  <button (click)="cancelarCompra()">Cancelar</button>
-  <button (click)="concluirCompra()">Concluir</button>
+    <tbody>
+      <tr
+        *ngFor="let produto of produtos"
+        [ngStyle]="{ backgroundColor: produto.comprado ? 'green' : '' }"
+      >
+        <td class="table_row">
+          <span *ngIf="!produto.editarState">
+            {{ produto.nome }}
+          </span>
+          <input
+            [(ngModel)]="produtoEditado.nome"
+            placeholder="Nome do Produto"
+            type="text"
+            *ngIf="produto.editarState"
+          />
+          <div class="buttons-produto">
+            <button
+              *ngIf="produto.editarState"
+              (click)="updateProduto(produto)"
+            >
+              Salvar
+            </button>
+            <button
+              *ngIf="produto.editarState"
+              (click)="cancelarEditarProduto(produto)"
+            >
+              Cancelar
+            </button>
+            <button *ngIf="!produto.comprado" (click)="editarProduto(produto)">
+              Editar
+            </button>
+            <button (click)="apagarProduto(produto)">Apagar</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="buy-cancel-buttons">
+    <button (click)="cancelarCompra()">Cancelar</button>
+    <button (click)="concluirCompra()">Concluir</button>
+  </div>
 </div>
-
 <ng-template #carregando>
   <div id="preloader">
     <div class="inner">

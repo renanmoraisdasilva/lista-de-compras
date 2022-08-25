@@ -50,16 +50,21 @@ export class ListaProdutoComponent implements OnInit {
   }
 
   editarProduto(produto: Produto): void {
+    this.produtoEditado.nome = produto.nome;
     produto.editarState = !produto.editarState;
-    produto.nome = this.produtoEditado.nome;
     const index = this.produtos.findIndex(
       (obj) => obj.codigo == produto.codigo
     );
     this.produtos[index].nome = produto.nome;
   }
 
+  cancelarEditarProduto(produto: Produto): void {
+    produto.editarState = !produto.editarState;
+    this.produtoEditado.nome = produto.nome;
+  }
+
   updateProduto(produto: Produto): void {
-    console.log(produto);
+    produto.nome = this.produtoEditado.nome;
     this.produtoService.update(produto).subscribe((response) => {
       response['codigo'] = response['id'];
       delete response['id'];
