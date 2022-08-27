@@ -18,7 +18,10 @@
         [ngStyle]="{ backgroundColor: produto.comprado ? 'green' : '' }"
       >
         <td class="table_row">
-          <span *ngIf="!produto.editarState">
+          <span
+            [ngClass]="{ 'text-decoration-line-through': produto.comprado }"
+            *ngIf="!produto.editarState"
+          >
             {{ produto.nome }}
           </span>
           <input
