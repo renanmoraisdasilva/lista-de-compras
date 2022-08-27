@@ -39,12 +39,18 @@ export class ListaProdutoComponent implements OnInit {
   }
 
   incluirProduto(): void {
-    this.produtoService.salvar(this.novoProduto).subscribe((response) => {
-      response['codigo'] = response['id'];
-      delete response['id'];
-      this.novoProduto.codigo = this.produtos.push(response);
-      this.toastr.success('Produto incluído com sucesso');
-    });
+    this.produtoService.salvar(this.novoProduto).subscribe(
+      (response) => {
+        response['codigo'] = response['id'];
+        delete response['id'];
+        this.produtos.push(response);
+        this.toastr.success('Produto incluído com sucesso');
+      },
+      (err: any) => {
+        console.error(err);
+      }
+    );
+    this.novoProduto = new Produto();
   }
 
   editarProduto(produto: Produto): void {
